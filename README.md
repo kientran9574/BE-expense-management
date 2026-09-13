@@ -1,9 +1,8 @@
-# Expense Management
+# BE Expense Management
 
-Ứng dụng quản lý chi tiêu cá nhân.
+Backend quản lý chi tiêu cá nhân, xây dựng bằng NestJS + Prisma + PostgreSQL. Chạy ở port `3000`.
 
-- **Backend** (thư mục gốc): NestJS + Prisma + PostgreSQL — chạy ở port `3000`.
-- **Frontend** (`frontend/`): Next.js + TanStack Query + Zustand + Tailwind — chạy ở port `3001`.
+Giao diện nằm ở repo riêng: [FE-expense-management](https://github.com/kientran9574/FE-expense-management).
 
 ## Chức năng hiện có
 
@@ -21,8 +20,6 @@
 
 ## Cài đặt
 
-### Backend
-
 ```bash
 npm install
 
@@ -33,36 +30,14 @@ cp .env.example .env
 npx prisma migrate dev
 ```
 
-### Frontend
-
-```bash
-cd frontend
-npm install
-cp .env.example .env.local   # NEXT_PUBLIC_API_URL trỏ tới backend
-```
-
 ## Chạy dự án
 
-Mở 2 terminal:
-
 ```bash
-# Terminal 1 — backend (port 3000)
-npm run start:dev
-
-# Terminal 2 — frontend (port 3001)
-cd frontend && npm run dev -- -p 3001
+npm run start:dev                     # chế độ dev, tự reload
+npm run build && npm run start:prod   # chạy bản build
 ```
 
-Truy cập giao diện tại http://localhost:3001
-
-Backend chỉ cho phép CORS từ `CORS_ORIGIN` (mặc định `http://localhost:3001`).
-
-## Giao diện
-
-- **Tổng quan**: số chi tiêu tháng hiện tại, chi tiêu trong ngày/năm, biểu đồ chi tiêu theo từng ngày trong tháng và theo từng tháng trong năm (mỗi biểu đồ có thể chuyển sang dạng bảng).
-- **Giao dịch**: danh sách + bộ lọc (khoảng ngày, loại, danh mục), thêm/sửa/xóa qua dialog.
-- **Danh mục**: thêm và xóa danh mục thu/chi.
-- Hỗ trợ giao diện sáng/tối và responsive trên mobile.
+Backend chỉ cho phép CORS từ `CORS_ORIGIN` (mặc định `http://localhost:3001`, là port của frontend). Nếu chạy frontend ở port khác, sửa biến này trong `.env`.
 
 ## API nhanh
 
@@ -99,8 +74,6 @@ Mỗi response summary trả về `totalIncome`, `totalExpense`, `net` cho kho�
 ## Test
 
 ```bash
-npm test        # unit test backend
-npm run lint    # oxlint backend
-
-cd frontend && npm run lint && npm run build   # frontend
+npm test        # unit test
+npm run lint    # oxlint
 ```
